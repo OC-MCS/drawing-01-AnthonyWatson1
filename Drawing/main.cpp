@@ -1,5 +1,7 @@
 //================================================
-// YOUR NAME GOES HERE <-----------------  
+// Anthony Watson
+// Programming II
+// Due Date 3/30/19 
 //================================================
 #include <iostream>
 #include <fstream>
@@ -26,10 +28,17 @@ int main()
 	SettingsMgr settingsMgr(Color::Blue, ShapeEnum::CIRCLE);
 	SettingsUI  settingsUI(&settingsMgr); 
 	ShapeMgr    shapeMgr;
-	DrawingUI   drawingUI(Vector2f(200, 50));
+	DrawingUI   drawingUI(Vector2f(350, 50));
 	
 	// ********* Add code here to make the managers read from shapes file (if the file exists)
-
+	/*We are supposed to have the header files read from the file via the fstream object 
+	which wil be passed to the other header files. But there has to be a function in the 
+	header files to be able to pass it so it will read the current shape and current color.
+	*/
+	fstream file;
+	//file.open("shapes.bin", ios::out | ios::binary);
+	shapeMgr.load();
+	
 	while (window.isOpen()) 
 	{
 		Event event;
@@ -39,6 +48,8 @@ int main()
 			{
 				window.close();
 				// ****** Add code here to write all data to shapes file
+				/*file.open("shapes.bin", ios::out | ios::binary);
+				file.write(reinterpret_cast<char*>(&))*/
 			}
 			else if (event.type == Event::MouseButtonReleased)
 			{
@@ -56,6 +67,7 @@ int main()
 				{
 					// add a shape to the list based on current settings
 					shapeMgr.addShape(mousePos, settingsMgr.getCurShape(), settingsMgr.getCurColor());
+
 				}
 			}
 		}
